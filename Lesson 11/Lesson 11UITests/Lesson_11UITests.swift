@@ -31,21 +31,28 @@ class Lesson_11UITests: XCTestCase {
     }
     
     func testbuttonTesting () {
-    
-        let app = XCUIApplication()
-        app.textFields["Введите Логин"].tap()
-        app.textFields["Введите пароль"].tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["ВВОД"]/*[[".buttons[\"ВВОД\"].staticTexts[\"ВВОД\"]",".staticTexts[\"ВВОД\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+
+        let textLog = app.descendants(matching: .textField).matching(identifier: "textLog").element
+        XCTAssertTrue(textLog.exists)
         
+        let textPass = app.descendants(matching: .textField).matching(identifier: "textPass").element
+        XCTAssertTrue(textPass.exists)
+        
+        let button = app.buttons["ВВОД"]
+        XCTAssertFalse(button.isEnabled)
+        
+        textLog.tap()
+        textLog.typeText("lkkkjhi")
+        
+        textPass.tap()
+        textPass.typeText("asdfuytre")
+        XCTAssertTrue(button.isEnabled)
+
     }
     
-    func testLableTesting () {
-        
-    
-    }
-    
-    
-    
+
+
+
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
